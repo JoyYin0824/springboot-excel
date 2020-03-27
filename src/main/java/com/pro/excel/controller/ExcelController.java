@@ -60,38 +60,7 @@ public class ExcelController {
     }
 
 
-    @RequestMapping("/uploadDutyExcelNew")
-    @ResponseBody
-    public String uploadDutyExcel(HttpServletRequest request,
-                                  @RequestParam("file") MultipartFile multfile) throws Exception {
-        // 获取文件名
-        String fileName = multfile.getOriginalFilename();
-        // 获取文件后缀
-        String prefix=fileName.substring(fileName.lastIndexOf("."));
-        // 用uuid作为文件名，防止生成的临时文件重复
-        final File excelFile = File.createTempFile("", prefix);
-        // MultipartFile to File
-        multfile.transferTo(excelFile);
 
-        //你的业务逻辑
-
-        //程序结束时，删除临时文件
-        deleteFile(excelFile);
-        return "";
-    }
-
-    /**
-     * 删除
-     *
-     * @param files
-     */
-    private void deleteFile(File... files) {
-        for (File file : files) {
-            if (file.exists()) {
-                file.delete();
-            }
-        }
-    }
 
 
 }
